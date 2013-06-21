@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Tu peux webtest</title>
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" href="static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="static/impress.css" type="text/css" />
+    <link rel="stylesheet" href="static/custom.css" type="text/css" />
+  </head>
+  <body>
+    <div id="impress">
+      
+  <div class="step first center slide section" id="tu-peux-webtest">
+<h1>Tu peux webtest<a class="headerlink" href="#tu-peux-webtest" title="Permalink to this headline">¶</a></h1>
+<p>Gael Pasgrimaud <a class="reference external" href="http://twitter.com/gawel_">&#64;gawel_</a></p>
+<p>pytong 2013</p>
+</div>
+<div class="step slide section" data-x="1000" id="about-me">
+<h1>About me<a class="headerlink" href="#about-me" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Pythonista <a class="reference external" href="http://twitter.com/bearstech">&#64;bearstech</a></li>
+<li>Membre fondateur de l&#8217;<a class="reference external" href="http://www.afpy.org">AFPy</a></li>
+<li>Mainteneur WebTest</li>
+</ul>
+</div>
+<div class="step slide section" data-x="2000" id="about-wsgi">
+<h1>About WSGI<a class="headerlink" href="#about-wsgi" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Web Server Gateway Interface</li>
+<li>Standardisation des échanges</li>
+</ul>
+<div class="highlight-python"><pre>server &lt;=&gt; middleware &lt;=&gt; applications</pre>
+</div>
+<ul class="simple">
+<li>Tous les frameworks respectent cette norme</li>
+</ul>
+</div>
+<div class="step slide section" data-x="3000" id="testing">
+<h1>Testing!<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Nul ne conteste l&#8217;importance des tests</li>
+<li>Test unitaire vs Test fonctionnel</li>
+</ul>
+</div>
+<div class="step slide section" data-x="4000" id="webtest">
+<h1>WebTest<a class="headerlink" href="#webtest" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Orienté test fonctionel</li>
+<li>Remplace un serveur WSGI pour simuler un client web</li>
+<li>Testé!</li>
+</ul>
+</div>
+<div class="step slide section" data-x="5000" id="une-premiere-requete">
+<h1>Une première requète<a class="headerlink" href="#une-premiere-requete" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">TestApp</span><span class="p">(</span><span class="n">my_application</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resp</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s">&#39;*&#39;</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_int</span> <span class="o">==</span> <span class="mi">200</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resp</span><span class="o">.</span><span class="n">mustcontain</span><span class="p">(</span><span class="s">&#39;Welcome!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="step slide section" data-x="6000" id="clicker">
+<h1>Clicker<a class="headerlink" href="#clicker" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">resp</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">click</span><span class="p">(</span><span class="s">&#39;Login&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="step slide section" data-x="7000" id="tester-des-formulaires">
+<h1>Tester des formulaires<a class="headerlink" href="#tester-des-formulaires" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">form</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">forms</span><span class="p">[</span><span class="s">&#39;login_form&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">form</span><span class="o">.</span><span class="n">lint</span><span class="p">()</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">form</span><span class="p">[</span><span class="s">&#39;login&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;gawel&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">form</span><span class="p">[</span><span class="s">&#39;password&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;passwd&#39;</span><span class="p">]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resp</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Permet l&#8217;upload de fichier.</p>
+<p>Certain contrôles sont effectués quand on défini la valeur d&#8217;un champs.</p>
+</div>
+<div class="step slide section" data-x="8000" id="tester-la-reponse">
+<h1>Tester la réponse<a class="headerlink" href="#tester-la-reponse" title="Permalink to this headline">¶</a></h1>
+<p>Avec minidom:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">resp</span><span class="o">.</span><span class="n">xml</span>
+</pre></div>
+</div>
+<p>Avec lxml/pyquery:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">resp</span><span class="o">.</span><span class="n">lxml</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">resp</span><span class="o">.</span><span class="n">pyquery</span>
+</pre></div>
+</div>
+<p>Avec json:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">resp</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+</div>
+<div class="step slide section" data-x="9000" id="tester-une-api">
+<h1>Tester une api<a class="headerlink" href="#tester-une-api" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="s">&#39;my_ressource&#39;</span> <span class="ow">in</span> <span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;/v1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">resp</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">post_json</span><span class="p">(</span><span class="s">&#39;/v1/my_ressource&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;foo&#39;</span><span class="p">:</span> <span class="s">&#39;bar&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Envois un bon Content-Type</p>
+<p>Methodes GET POST PUT PATCH OPTIONS DELETE implémentées</p>
+</div>
+<div class="step slide section" data-x="10000" id="tester-le-consomateur-de-l-api">
+<h1>Tester le consomateur de l&#8217;api<a class="headerlink" href="#tester-le-consomateur-de-l-api" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">TestWebApp</span><span class="p">(</span><span class="n">unnitest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="n">webtest</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">StopableWSGIServer</span><span class="p">(</span><span class="n">my_api</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">webapp</span> <span class="o">=</span> <span class="n">TestApp</span><span class="p">(</span><span class="n">my_webapp</span><span class="p">(</span><span class="n">api_url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">application_url</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Lance un vrai server web (waitress)</li>
+</ul>
+</div>
+<div class="step slide section" data-x="11000" id="tester-la-prod">
+<h1>Tester la prod!<a class="headerlink" href="#tester-la-prod" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">app</span> <span class="o">=</span> <span class="n">TestApp</span><span class="p">(</span><span class="s">&#39;http://bearstech.com&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Utilise WSGIProxy2 pour executer les requètes.</li>
+<li>Permet aussi de tester du PHP voir du Java!!</li>
+</ul>
+</div>
+<div class="step slide section" data-x="12000" id="utiliser-un-vrai-navigateur">
+<h1>Utiliser un vrai navigateur<a class="headerlink" href="#utiliser-un-vrai-navigateur" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>webtest-selenium <a class="reference external" href="https://github.com/gawel/webtest-selenium">https://github.com/gawel/webtest-selenium</a></li>
+<li>webtest-casperjs <a class="reference external" href="https://github.com/gawel/webtest-casperjs">https://github.com/gawel/webtest-casperjs</a></li>
+</ul>
+</div>
+<div class="step slide section" data-x="13000" id="autres-librairies">
+<h1>Autres Librairies<a class="headerlink" href="#autres-librairies" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>Django: <a class="reference external" href="https://github.com/kmike/django-webtest">https://github.com/kmike/django-webtest</a></li>
+<li>Test de charges: loads <a class="reference external" href="https://github.com/mozilla-services/loads">https://github.com/mozilla-services/loads</a></li>
+</ul>
+</div>
+<div class="step slide section" data-x="14000" id="et-voila">
+<h1>Et voilà!<a class="headerlink" href="#et-voila" title="Permalink to this headline">¶</a></h1>
+<p>Des questions ?</p>
+</div>
+
+
+    </div>
+    <script src="static/impress/js/impress.js"></script>
+    <script src="static/jquery.js"></script>
+    <script src="static/impress.js"></script>
+    <script src="static/custom.js"></script>
+    <script>
+      if (! /_modules/.exec(window.location.href)) {
+        impress().init();
+      }
+    </script>
+  </body>
+</html>
