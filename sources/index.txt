@@ -11,7 +11,7 @@ Tu peux webtest
 
 Gael Pasgrimaud `@gawel_ <http://twitter.com/gawel_>`_
 
-pytong 2013
+2013
 
 About me
 ========
@@ -80,7 +80,7 @@ Tester des formulaires
     >>> form.lint()
 
     >>> form['login'] = 'gawel'
-    >>> form['password'] = 'passwd']
+    >>> form['password'] = 'passwd'
 
     >>> resp = form.submit()
 
